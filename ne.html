@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl" id="html-tag">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sea & Sand | باقات VIP والرحلات الجماعية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-blue: #0066cc;
+            --blue-dark: #003366;
+            --accent-gold: #f4a261;
+            --vip-gold: #d4af37;
+            --dark-text: #2d3436;
+            --light-bg: #f8f9fa;
+            --white: #ffffff;
+            --transition: cubic-bezier(0.25, 1, 0.5, 1) 0.5s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--dark-text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        /* الهيدر */
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1.2rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--blue-dark);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent-gold); }
+
+        nav a {
+            margin: 0 15px;
+            text-decoration: none;
+            color: var(--dark-text);
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        nav a:hover { color: var(--primary-blue); }
+
+        /* أزرار الهيدر والتحكم */
+        .header-buttons {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .btn-book {
+            color: white;
+            padding: 10px 22px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 0.9rem;
+            transition: var(--transition);
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            border: none;
+        }
+
+        /* زر الواتس اب */
+        .btn-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+        }
+
+        .btn-whatsapp:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+        }
+
+        /* زر السيستم الجديد */
+        .btn-system {
+            background: linear-gradient(135deg, var(--primary-blue), var(--blue-dark));
+            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.3);
+        }
+
+        .btn-system:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.5);
+        }
+
+        /* زر ترجمة اللغة */
+        .btn-lang {
+            background: #e2e8f0;
+            color: var(--dark-text);
+            padding: 10px 15px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            transition: 0.3s;
+        }
+        .btn-lang:hover {
+            background: var(--blue-dark);
+            color: white;
+        }
+
+        /* البانر الرئيسي المحسن */
+        .hero {
+            height: 75vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: white;
+            padding: 0 20px;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.55);
+            z-index: 1;
+        }
+
+        .hero h1, .hero p {
+            position: relative;
+            z-index: 2;
+        }
+        .hero h1 {
+            margin-bottom: 15px;
+        }
+
+        /* نظام السلايدر المتحرك للخلفية */
+        .hero-slider {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        .slide {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            animation: bgSlideshow 24s linear infinite;
+        }
+
+        .slide:nth-child(1) {
+            background-image: url('https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=1920&q=80');
+            animation-delay: 0s;
+        }
+        .slide:nth-child(2) {
+            background-image: url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=1920&q=80');
+            animation-delay: 6s;
+        }
+        .slide:nth-child(3) {
+            background-image: url('https://images.unsplash.com/photo-1629116812239-01c5108fccfc?auto=format&fit=crop&w=1920&q=80');
+            animation-delay: 12s;
+        }
+        .slide:nth-child(4) {
+            background-image: url('https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=1920&q=80');
+            animation-delay: 18s;
+        }
+
+        @keyframes bgSlideshow {
+            0% { opacity: 0; transform: scale(1); }
+            4% { opacity: 1; }
+            25% { opacity: 1; }
+            29% { opacity: 0; transform: scale(1.05); }
+            100% { opacity: 0; }
+        }
+
+        /* الأقسام والعناوين */
+        .section-container {
+            padding: 5rem 8%;
+        }
+
+        .section-container.vip-bg {
+            background: #111827;
+            color: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            position: relative;
+            display: inline-block;
+            padding-bottom: 15px;
+        }
+
+        .section-container.vip-bg .section-title h2 { color: var(--vip-gold); }
+        .section-container.normal-bg .section-title h2 { color: var(--blue-dark); }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            bottom: 0; left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+        .section-container.vip-bg .section-title h2::after { background: var(--vip-gold); }
+        .section-container.normal-bg .section-title h2::after { background: var(--primary-blue); }
+
+        /* شبكة الكروت المتفاعلة */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .service-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .section-container.vip-bg .service-card {
+            background: #1f2937;
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+
+        .card-img-holder {
+            position: relative;
+            width: 100%;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .card-img-holder img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .card-img-holder img {
+            transform: scale(1.15) rotate(1deg);
+        }
+
+        html[dir="rtl"] .card-badge { left: auto; right: 15px; }
+        html[dir="ltr"] .card-badge { right: auto; left: 15px; }
+
+        .card-badge {
+            position: absolute;
+            top: 15px;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: white;
+            z-index: 2;
+        }
+        .vip-badge { background: var(--vip-gold); color: #000; }
+        .normal-badge { background: var(--primary-blue); }
+
+        .card-content {
+            padding: 2rem 1.5rem;
+            text-align: center;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .card-content h3 { font-size: 1.4rem; margin-bottom: 1rem; }
+        .section-container.normal-bg .card-content h3 { color: var(--blue-dark); }
+        .section-container.vip-bg .card-content h3 { color: var(--vip-gold); }
+
+        .card-content p { font-size: 0.95rem; color: #6b7280; margin: 0; }
+        .section-container.vip-bg .card-content p { color: #9ca3af; }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+
+        /* شريط التقييمات */
+        .reviews-ticker-zone {
+            background: #f1f5f9;
+            padding: 3rem 0;
+            border-top: 1px solid #e2e8f0;
+            border-bottom: 1px solid #e2e8f0;
+            position: relative;
+        }
+
+        .ticker-title {
+            text-align: center;
+            font-size: 1.5rem;
+            color: var(--blue-dark);
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+        }
+
+        .ticker-wrap {
+            width: 100%;
+            overflow: hidden;
+            display: flex;
+        }
+
+        .ticker-track {
+            display: flex;
+            width: max-content;
+            animation: scrollTicker 30s linear infinite;
+        }
+
+        .ticker-track:hover {
+            animation-play-state: paused;
+        }
+
+        .review-inline-card {
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            margin: 0 15px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.04);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            min-width: 300px;
+            max-width: 350px;
+        }
+        
+        html[dir="rtl"] .review-inline-card { border-right: 4px solid var(--accent-gold); border-left: none; }
+        html[dir="ltr"] .review-inline-card { border-left: 4px solid var(--accent-gold); border-right: none; }
+
+        .review-user {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: bold;
+            font-size: 0.95rem;
+            color: var(--blue-dark);
+        }
+
+        .review-user span {
+            font-size: 0.8rem;
+            color: #64748b;
+            background: #e2e8f0;
+            padding: 2px 8px;
+            border-radius: 10px;
+        }
+
+        .stars {
+            color: #ffc107;
+            font-size: 0.85rem;
+        }
+
+        .review-text {
+            font-size: 0.9rem;
+            color: #475569;
+            white-space: normal;
+        }
+
+        @keyframes scrollTicker {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(30%); }
+        }
+
+        /* الفوتر الشامل */
+        footer {
+            background: #0f172a;
+            color: #cbd5e1;
+            padding: 5rem 8% 2rem 8%;
+        }
+
+        html[dir="rtl"] footer { text-align: right; }
+        html[dir="ltr"] footer { text-align: left; }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 3rem;
+            margin-bottom: 4rem;
+        }
+
+        .footer-col h4 {
+            color: var(--white);
+            font-size: 1.3rem;
+            margin-bottom: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-col h4::after {
+            content: '';
+            position: absolute;
+            width: 35px;
+            height: 3px;
+            background: var(--accent-gold);
+            bottom: 0;
+        }
+        html[dir="rtl"] .footer-col h4::after { right: 0; left: auto; }
+        html[dir="ltr"] .footer-col h4::after { left: 0; right: auto; }
+
+        .footer-contact-links { list-style: none; padding: 0; }
+        .footer-contact-links li {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 1.2rem;
+            font-size: 0.95rem;
+        }
+
+        .footer-contact-links i { color: var(--accent-gold); width: 20px; }
+
+        .social-icons { display: flex; gap: 15px; margin-top: 1.5rem; }
+        .social-icons a {
+            width: 40px; height: 40px; background: rgba(255,255,255,0.05); color: var(--white);
+            border-radius: 50px; display: flex; align-items: center; justify-content: center;
+            text-decoration: none; transition: 0.3s;
+        }
+        .social-icons a:hover { background: var(--accent-gold); color: #0f172a; transform: translateY(-5px); }
+
+        .footer-bottom {
+            text-align: center; padding-top: 2rem; border-top: 1px solid rgba(255,255,255,0.1); font-size: 0.9rem;
+        }
+
+        @media (max-width: 992px) {
+            header { padding: 1.2rem 3%; flex-direction: column; gap: 15px; text-align: center; }
+            nav { margin-bottom: 10px; }
+            .hero h1 { font-size: 2.5rem; }
+        }
+
+        @media (max-width: 768px) {
+            nav { display: none; }
+            .hero h1 { font-size: 2.2rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="#" class="logo">Sea <span>& Sand</span></a>
+        <nav>
+            <a href="#vip-services" data-key="nav-vip">خدمات VIP الملكية</a>
+            <a href="#normal-services" data-key="nav-group">الرحلات الجماعية الاقتصادية</a>
+            <a href="#contact" data-key="nav-contact">اتصل بنا</a>
+        </nav>
+        <div class="header-buttons">
+            <button class="btn-book btn-lang" onclick="toggleLanguage()"><i class="fas fa-globe"></i> <span id="lang-text">English</span></button>
+
+            <a href="https://wa.me/201234567890" class="btn-book btn-whatsapp" target="_blank"><i class="fab fa-whatsapp"></i> <span data-key="btn-whatsapp">الواتساب</span></a>
+            
+            <a href="#" class="btn-book btn-system"><i class="fas fa-laptop-code"></i> <span data-key="btn-system">حجز السيستم</span></a>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+        <h1 data-key="hero-title">اختر طريقتك المفضلة للمغامرة مع Sea & Sand</h1>
+        <p data-key="hero-desc">اكتشف سحر مصر من عراقة القاهرة وأهراماتها إلى رفاهية الجونة، الغردقة، وشرم الشيخ</p>
+    </section>
+
+    <section class="section-container vip-bg" id="vip-services">
+        <div class="section-title">
+            <h2 data-key="vip-title">👑 خدمات الـ VIP والـ Private</h2>
+            <p style="color: #9ca3af; margin-top: 10px;" data-key="vip-subtitle">خصوصية تامة، رفاهية مطلقة، وجداول مخصصة لك ولعائلتك فقط</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge vip-badge" data-key="badge-vip-1">خصوصية مطلقة</span>
+                    <img src="https://images.unsplash.com/photo-1567899378494-47b22a2ae96a?auto=format&fit=crop&w=600&q=80" alt="يخت خاص">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-vip-t1">يخت خاص بالكامل (Private)</h3>
+                    <p data-key="card-vip-d1">احجز اليخت بالكامل لك ولعائلتك مع طاقم ضيافة وقبطان محترف، شامل وجبة غداء سي فود فاخرة ومسار مخصص تماماً.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge vip-badge" data-key="badge-vip-2">VIP ليموزين</span>
+                    <img src="https://images.unsplash.com/photo-1549399542-7e3f8b79c341?auto=format&fit=crop&w=600&q=80" alt="سيارة مرسيدس">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-vip-t2">استقبال مطار VIP شخصي</h3>
+                    <p data-key="card-vip-d2">سيارة مرسيدس حديثة مخصصة لك تنتظرك أمام صالة الوصول فور هبوط الطائرة مباشرة مع سائق خاص يتولى نقل حقائبك.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge vip-badge" data-key="badge-vip-3">سفاري خاص</span>
+                    <img src="https://images.unsplash.com/photo-1539650116574-8efeb43e2750?auto=format&fit=crop&w=600&q=80" alt="سفاري خاص">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-vip-t3">سفاري صحراوي برايفت</h3>
+                    <p data-key="card-vip-d3">دليل سياحي وسيارات دفع رباعي مخصصة لمجموعتك فقط بدون أي غرباء، مع خيمة بدوية ملكية مستقلة وعشاء فاخر.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge vip-badge" data-key="badge-vip-4">مدرب خاص</span>
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?auto=format&fit=crop&w=600&q=80" alt="غوص خاص">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-vip-t4">رحلات غوص واستكشاف خاصة</h3>
+                    <p data-key="card-vip-d4">مدرب غوص معتمد يرافقك بشكل فردي لتعليمك واستكشاف أندر الشعاب المرجانية، مع توفير أحدث المعدات العالمية.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section-container normal-bg" id="normal-services">
+        <div class="section-title">
+            <h2 data-key="group-title">👥 الخدمات والرحلات الجماعية (Group Tours)</h2>
+            <p style="color: #6b7280; margin-top: 10px;" data-key="group-subtitle">رحلات تفاعلية، ممتعة، وبأسعار اقتصادية ممتازة لمشاركة الأوقات مع الآخرين</p>
+        </div>
+        <div class="services-grid">
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge normal-badge" data-key="badge-grp-1">رحلة جروب</span>
+                    <img src="https://images.unsplash.com/photo-1504280390367-361c6d9f38f4?auto=format&fit=crop&w=600&q=80" alt="يخت جماعي">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-grp-t1">رحلات اليخوت الجماعية</h3>
+                    <p data-key="card-grp-d1">انضم إلى جروب سياحي مميز على متن يخت كبير وممتع، البرنامج يشمل وقفتين سنوركلنج، وزيارة جزيرة سياحية بوفيه غداء.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge normal-badge" data-key="badge-grp-2">توصيل مشترك</span>
+                    <img src="https://images.unsplash.com/photo-1557223562-6c77ef16210f?auto=format&fit=crop&w=600&q=80" alt="حافلة سياحية">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-grp-t2">شاتل باص واستقبال المطار المشترك</h3>
+                    <p data-key="card-grp-d2">خدمة نقل اقتصادية ذكية عبر حافلات سياحية حديثة ومكيفة، تجمع المسافرين المتجهين لنفس منطقة الفنادق بتكلفة مخفضة.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge normal-badge" data-key="badge-grp-3">مغامرة جماعية</span>
+                    <img src="https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?auto=format&fit=crop&w=600&q=80" alt="سفاري جروب">
+                </div>
+                <div class="card-content">
+                    <h3 data-key="card-grp-t3">سفاري الجيب والبيتش باجي الجماعي</h3>
+                    <p data-key="card-grp-d3">انطلق مع أسطول من المغامرين في رحلة جماعية بالبيتش باجي داخل الصحراء، تنتهي بالتجمع في الحفلة البدوية الكبرى.</p>
+                </div>
+            </div>
+
+            <div class="service-card">
+                <div class="card-img-holder">
+                    <span class="card-badge normal-badge" data-key="badge-grp-4">سنوركلنج جماعي</span>
+                    <img src="https://images.unsplash.com/photo-1502680390469-be75c86b636f?auto=format&fit=crop&w=600&q=80" alt="سنوركلنج">
+                </div>
+                <div class="card-content">
+                    <h3><span data-key="card-grp-t4">رحلات السنوركلنج والجزر البحرية</span></h3>
+                    <p><span data-key="card-grp-d4">رحلة بحرية خفيفة واقتصادية بالمركب السريع لشواطئ الجزر القريبة، مثالية للعائلات والشباب للاستمتاع بالسباحة.</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="reviews-ticker-zone">
+        <div class="ticker-title"><i class="fab fa-google"></i> <span data-key="reviews-heading">آراء عملائنا السعداء عبر العالم</span></div>
+        <div class="ticker-wrap">
+            <div class="ticker-track">
+                
+                <div class="review-inline-card">
+                    <div class="review-user"><span data-key="user1-name">أحمد الماجد</span> <span data-key="user1-cty">🇸🇦 السعودية</span></div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-text" data-key="user1-text">اليخت البرايفت كان تجربة خيالية والخدمة ملوكية. يستاهل كل ريال.</div>
+                </div>
+
+                <div class="review-inline-card">
+                    <div class="review-user">John Miller <span data-key="user2-cty">🇬🇧 بريطانيا</span></div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i></div>
+                    <div class="review-text" data-key="user2-text">Excellent airport pickup service. The driver was on time and very helpful.</div>
+                </div>
+
+                <div class="review-inline-card">
+                    <div class="review-user"><span data-key="user3-name">كريم ممدوح</span> <span data-key="user3-cty">🇪🇬 مصر</span></div>
+                    <div class="stars"><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i></div>
+                    <div class="review-text" data-key="user3-text">رحلة السفاري الجماعيه كانت ممتعة جداً والمنظمين روحهم حلوة أوي.</div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <footer id="contact">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4 data-key="f-about-t">عن Sea & Sand</h4>
+                <p data-key="f-about-d">نحن بوابتك الأولى لتجربة أقصى درجات الإثارة في المغامرات الجبلية والرفاهية في الرحلات البحرية، ملتزمون بتقديم أعلى مستويات الخدمة منذ وصولك المطار.</p>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-key="f-links-t">روابط التصفح السريع</h4>
+                <ul style="list-style: none; line-height: 2; padding: 0;">
+                    <li><a href="#vip-services" style="color: var(--vip-gold); text-decoration: none;" data-key="f-link-1">👑 باقات VIP والخاص</a></li>
+                    <li><a href="#normal-services" style="color: #cbd5e1; text-decoration: none;" data-key="f-link-2">👥 الرحلات الجماعية الاقتصادية</a></li>
+                    <li><a href="#" style="color: #cbd5e1; text-decoration: none;" data-key="f-link-3">شروط وأحكام الحجز</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-key="f-contact-t">بيانات الاتصال الرسمية</h4>
+                <ul class="footer-contact-links">
+                    <li><i class="fas fa-map-marker-alt"></i> <span data-key="f-addr">مصر، البحر الأحمر، الغردقة - المشاية السياحية</span></li>
+                    <li><i class="fas fa-phone-alt"></i> +20 123 456 7890</li>
+                    <li><i class="fas fa-phone-alt"></i> +20 100 987 6543</li>
+                    <li><i class="fas fa-envelope"></i> booking@sahara-wave.com</li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h4 data-key="f-social-t">حساباتنا على السوشيال ميديا</h4>
+                <p data-key="f-social-d">تابع تغطياتنا الحية لرحلاتنا اليومية عبر المنصات التالية:</p>
+                <div class="social-icons">
+                    <a href="https://facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://instagram.com" target="_blank"><i class="fab fa-instagram"></i></a>
+                    <a href="https://tiktok.com" target="_blank"><i class="fab fa-tiktok"></i></a>
+                </div>
+                <p style="margin-top: 1.5rem; font-size: 0.85rem; color: var(--accent-gold);"><i class="far fa-clock"></i> <span data-key="f-hours">نعمل على مدار 24 ساعة لخدمتكم</span></p>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p><span data-key="f-rights">جميع الحقوق محفوظة &copy; 2026 لشركة</span> <strong>Sea & Sand</strong></p>
+            <p style="font-size: 0.8rem; color: #94a3b8;">
+                b: <a href="https://lin-ats.com" target="_blank" style="color: var(--accent-gold); text-decoration: none; font-weight: bold;">Link-ATS.Com</a>
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        const translations = {
+            ar: {
+                "nav-vip": "خدمات VIP الملكية",
+                "nav-group": "الرحلات الجماعية الاقتصادية",
+                "nav-contact": "اتصل بنا",
+                "btn-whatsapp": "الواتساب",
+                "btn-system": "حجز السيستم",
+                "hero-title": "اختر طريقتك المفضلة للمغامرة مع Sea & Sand",
+                "hero-desc": "اكتشف سحر مصر من عراقة القاهرة وأهراماتها إلى رفاهية الجونة، الغردقة، وشرم الشيخ",
+                "vip-title": "👑 خدمات الـ VIP والـ Private",
+                "vip-subtitle": "خصوصية تامة، رفاهية مطلقة، وجداول مخصصة لك ولعائلتك فقط",
+                "badge-vip-1": "خصوصية مطلقة",
+                "card-vip-t1": "يخت خاص بالكامل (Private)",
+                "card-vip-d1": "احجز اليخت بالكامل لك ولعائلتك مع طاقم ضيافة وقبطان محترف، شامل وجبة غداء سي فود فاخرة ومسار مخصص تماماً.",
+                "badge-vip-2": "VIP ليموزين",
+                "card-vip-t2": "استقبال مطار VIP شخصي",
+                "card-vip-d2": "سيارة مرسيدس حديثة مخصصة لك تنتظرك أمام صالة الوصول فور هبوط الطائرة مباشرة مع سائق خاص يتولى نقل حقائبك.",
+                "badge-vip-3": "سفاري خاص",
+                "card-vip-t3": "سفاري صحراوي برايفت",
+                "card-vip-d3": "دليل سياحي وسيارات دفع رباعي مخصصة لمجموعتك فقط بدون أي غرباء، مع خيمة بدوية ملكية مستقلة وعشاء فاخر.",
+                "badge-vip-4": "مدرب خاص",
+                "card-vip-t4": "رحلات غوص واستكشاف خاصة",
+                "card-vip-d4": "مدرب غوص معتمد يرافقك بشكل فردي لتعليمك واستكشاف أندر الشعاب المرجانية، مع توفير أحدث المعدات العالمية.",
+                "group-title": "👥 الخدمات والرحلات الجماعية (Group Tours)",
+                "group-subtitle": "رحلات تفاعلية، ممتعة، وبأسعار اقتصادية ممتازة لمشاركة الأوقات مع الآخرين",
+                "badge-grp-1": "رحلة جروب",
+                "card-grp-t1": "رحلات اليخوت الجماعية",
+                "card-grp-d1": "انضم إلى جروب سياحي مميز على متن يخت كبير وممتع، البرنامج يشمل وقفتين سنوركلنج، وزيارة جزيرة سياحية بوفيه غداء.",
+                "badge-grp-2": "توصيل مشترك",
+                "card-grp-t2": "شاتل باص واستقبال المطار المشترك",
+                "card-grp-d2": "خدمة نقل اقتصادية ذكية عبر حافلات سياحية حديثة ومكيفة، تجمع المسافرين المتجهين لنفس منطقة الفنادق بتكلفة مخفضة.",
+                "badge-grp-3": "مغامرة جماعية",
+                "card-grp-t3": "سفاري الجيب والبيتش باجي الجماعي",
+                "card-grp-d3": "انطلق مع أسطول من المغامرين في رحلة جماعية بالبيتش باجي داخل الصحراء، تنتهي بالتجمع في الحفلة البدوية الكبرى.",
+                "badge-grp-4": "سنوركلنج جماعي",
+                "card-grp-t4": "رحلات السنوركلنج والجزر البحرية",
+                "card-grp-d4": "رحلة بحرية خفيفة واقتصادية بالمركب السريع لشواطئ الجزر القريبة، مثالية للعائلات والشباب للاستمتاع بالسباحة.",
+                "reviews-heading": "آراء عملائنا السعداء عبر العالم",
+                "user1-name": "أحمد الماجد", "user1-cty": "🇸🇦 السعودية", "user1-text": "اليخت البرايفت كان تجربة خيالية والخدمة ملوكية. يستاهل كل ريال.",
+                "user2-cty": "🇬🇧 بريطانيا", "user2-text": "Excellent airport pickup service. The driver was on time and very helpful.",
+                "user3-name": "كريم ممدوح", "user3-cty": "🇪🇬 مصر", "user3-text": "رحلة السفاري الجماعيه كانت ممتعة جداً والمنظمين روحهم حلوة أوي.",
+                "f-about-t": "عن Sea & Sand",
+                "f-about-d": "نحن بوابتك الأولى لتجربة أقصى درجات الإثارة في المغامرات الجبلية والرفاهية في الرحلات البحرية، ملتزمون بتقديم أعلى مستويات الخدمة منذ وصولك المطار.",
+                "f-links-t": "روابط التصفح السريع",
+                "f-link-1": "👑 باقات VIP والخاص", "f-link-2": "👥 الرحلات الجماعية الاقتصادية", "f-link-3": "شروط وأحكام الحجز",
+                "f-contact-t": "بيانات الاتصال الرسمية",
+                "f-addr": "مصر، البحر الأحمر، الغردقة - المشاية السياحية",
+                "f-social-t": "حساباتنا على السوشيال ميديا",
+                "f-social-d": "تابع تغطياتنا الحية لرحلاتنا اليومية عبر المنصات التالية:",
+                "f-hours": "نعمل على مدار 24 ساعة لخدمتكم",
+                "f-rights": "جميع الحقوق محفوظة &copy; 2026 لشركة"
+            },
+            en: {
+                "nav-vip": "Royal VIP Services",
+                "nav-group": "Economic Group Tours",
+                "nav-contact": "Contact Us",
+                "btn-whatsapp": "WhatsApp",
+                "btn-system": "Book System",
+                "hero-title": "Choose Your Favorite Adventure With Sea & Sand",
+                "hero-desc": "Discover the magic of Egypt from Cairo's history & Pyramids to El Gouna, Hurghada, and Sharm El Sheikh luxury",
+                "vip-title": "👑 VIP & Private Services",
+                "vip-subtitle": "Full privacy, absolute luxury, and tailor-made schedules for you and your family only",
+                "badge-vip-1": "Absolute Privacy",
+                "card-vip-t1": "Fully Private Yacht",
+                "card-vip-d1": "Book the entire yacht for your family with a professional crew, including a premium seafood lunch and a fully customized itinerary.",
+                "badge-vip-2": "VIP Limousine",
+                "card-vip-t2": "Personal VIP Airport Pickup",
+                "card-vip-d2": "A modern Mercedes vehicle awaits you right outside the arrival hall as soon as your plane lands, with a private driver to handle your luggage.",
+                "badge-vip-3": "Private Safari",
+                "card-vip-t3": "Private Desert Safari",
+                "card-vip-d3": "A tour guide and 4x4 vehicles dedicated exclusively to your group. Includes a private royal Bedouin tent and a luxury dinner.",
+                "badge-vip-4": "Private Coach",
+                "card-vip-t4": "Private Diving & Exploration",
+                "card-vip-d4": "A certified diving instructor accompanies you individually to explore rare coral reefs, with top-tier modern equipment provided.",
+                "group-title": "👥 Shared Group Tours",
+                "group-subtitle": "Interactive, fun, and cost-effective tours to share special moments with others",
+                "badge-grp-1": "Group Tour",
+                "card-grp-t1": "Group Yacht Trips",
+                "card-grp-d1": "Join a distinguished tourist group on a large, fun yacht. Program includes two snorkeling stops, an island visit, and a lunch buffet.",
+                "badge-grp-2": "Shared Shuttle",
+                "card-grp-t2": "Shuttle Bus & Shared Airport Pickup",
+                "card-grp-d2": "Smart, budget-friendly transportation via modern air-conditioned buses, grouping passengers heading to the same hotel area.",
+                "badge-grp-3": "Group Adventure",
+                "card-grp-t3": "Group Quad Bike & Jeep Safari",
+                "card-grp-d3": "Embark with a fleet of adventurers on a thrilling desert quad biking trip, ending with a grand Bedouin show and gathering.",
+                "badge-grp-4": "Group Snorkeling",
+                "card-grp-t4": "Snorkeling & Sea Islands Trips",
+                "card-grp-d4": "A light and economical boat trip to nearby island beaches, perfect for families and youths to enjoy swimming.",
+                "reviews-heading": "Our Happy Customers Around The World",
+                "user1-name": "Ahmed Al-Majed", "user1-cty": "🇸🇦 KSA", "user1-text": "The private yacht was an incredible experience and royal service. Worth every penny.",
+                "user2-cty": "🇬🇧 UK", "user2-text": "Excellent airport pickup service. The driver was on time and very helpful.",
+                "user3-name": "Karim Mamdouh", "user3-cty": "🇪🇬 Egypt", "user3-text": "The group safari trip was so much fun, and the organizers had an amazing spirit.",
+                "f-about-t": "About Sea & Sand",
+                "f-about-d": "We are your premier gateway to experience mountain thrills and marine luxury, committed to providing top-quality service since your arrival.",
+                "f-links-t": "Quick Links",
+                "f-link-1": "👑 VIP & Private Packages", "f-link-2": "👥 Economic Group Tours", "f-link-3": "Booking Terms & Conditions",
+                "f-contact-t": "Official Contact Info",
+                "f-addr": "Egypt, Red Sea, Hurghada - El Mamsha El Seyahi",
+                "f-social-t": "Follow Us On Social Media",
+                "f-social-d": "Follow our live daily trip updates through the following platforms:",
+                "f-hours": "We work 24/7 to serve you",
+                "f-rights": "All Rights Reserved &copy; 2026 for"
+            }
+        };
+
+        function toggleLanguage() {
+            const htmlTag = document.getElementById('html-tag');
+            const langText = document.getElementById('lang-text');
+            const currentLang = htmlTag.getAttribute('lang');
+            
+            const newLang = (currentLang === 'ar') ? 'en' : 'ar';
+            
+            htmlTag.setAttribute('lang', newLang);
+            htmlTag.setAttribute('dir', newLang === 'ar' ? 'rtl' : 'ltr');
+            
+            langText.innerText = newLang === 'ar' ? 'English' : 'عربي';
+            
+            document.querySelectorAll('[data-key]').forEach(element => {
+                const key = element.getAttribute('data-key');
+                if (translations[newLang][key]) {
+                    element.innerHTML = translations[newLang][key];
+                }
+            });
+        }
+    </script>
+
+    <script>
+        // 1. منع الزر الأيمن للفأرة بالكامل داخل الصفحة
+        document.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+        });
+
+        // 2. منع اختصارات لوحة المفاتيح الشائعة لفتح أدوات المطورين
+        document.addEventListener('keydown', function(e) {
+            // منع زر F12
+            if (e.key === 'F12') {
+                e.preventDefault();
+            }
+            // منع Ctrl + Shift + I (فتح الـ Inspect)
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'i')) {
+                e.preventDefault();
+            }
+            // منع Ctrl + Shift + J (فتح شاشة الكونسول)
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'J' || e.key === 'j')) {
+                e.preventDefault();
+            }
+            // منع Ctrl + U (فتح كود المصدر الأصلي للصفحة)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'U' || e.key === 'u')) {
+                e.preventDefault();
+            }
+            // منع Ctrl + S (منع حفظ الصفحة كملف محلي على جهاز المستخدم)
+            if ((e.ctrlKey || e.metaKey) && (e.key === 'S' || e.key === 's')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+    </body>
+</html>
